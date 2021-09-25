@@ -19,20 +19,31 @@ header {
     position: fixed;
     width: 100%;
     box-shadow: 0 4px 15px -10px black;
+    z-index: 10;
 }
 .navbar {
     background-color: var(--color-bg);
     color: var(--color-white);
 }
-.navbar a {
+.menu-contenedor {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+.div-logo {
     margin: auto;
-    font-weight: 700;
+    text-align: center;
     padding: 0.5rem;
+}
+.logo-rapiclima {
+    margin-bottom: 0;
+    font-weight: 700;
+    
     font-size: 1.25rem;
     color: var(--color-white);
     text-decoration: none;
 }
-.navbar a:hover {
+.logo-rapiclima:hover {
     color: var(--color-alt);
 }
 main {
@@ -42,6 +53,7 @@ main {
     display: grid;
     justify-content: center;
     align-content: center;
+    position: relative;
 }
 .buscador-cont .buscador-input{
     display: flex;
@@ -93,4 +105,34 @@ main {
 
 .buscador-cont .buscador-input label, input, a {
     margin-bottom: 3rem;
+}
+.div-busc-menu {
+    margin: auto;
+}
+.menu-buscador-input {
+    margin-bottom: 0;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    padding-left: .5rem;
+}
+.div-busc-menu a {
+    padding-left: 1rem;
+    text-decoration: none;
+    color: var(--color-remark);
+    transition: color .3 ease;
+}
+.div-busc-menu a:hover {
+    color: var(--color-alt);
+}
+.nombre-lugar {
+    margin: auto;
+}
+.not-found {
+    margin: auto;
+    position: absolute;
+    bottom: 9rem;
+}
+.menu-not-found {
+    
 }

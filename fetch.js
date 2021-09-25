@@ -29,6 +29,7 @@ function CrearHomeInicial() {
     inputBusqueda.name = ('busqueda');
     inputBusqueda.type = ('text');
     inputBusqueda.autocomplete = ('off');
+    inputBusqueda.placeholder = ('Ingresá aquí una ciudad.');
 
     this.getInputBusqueda = () => {
         return inputBusqueda;
@@ -61,9 +62,14 @@ function traerDatosClima(palabraBusqueda) {
     ).then(function(response){
         return response.json();
     }).then(function(responseJson){
-        console.log(responseJson);
-        crearElementos(responseJson);
-        return responseJson;
+        if (responseJson.cod == 200) {
+            console.log(responseJson);
+            eliminarHome();
+            ponerElementos(responseJson);
+            return responseJson;
+        } else {
+           ponerNotFound();
+        }
     }).catch(function (err) {
         console.log("Hubo un fallo en la interacción con la API.", err);
     });
@@ -72,38 +78,73 @@ function traerDatosClima(palabraBusqueda) {
 
 getBotonBusqueda().addEventListener("click", () => {
     traerDatosClima(busqueda.value);
-    eliminarHome();
-    
 });
+function crearNotFound () {
+    let notFound = d.createElement('p');
+    notFound.className = ('not-found');
+    notFound.id = ('notFound');
+    notFound.innerHTML = (`Lo siento, esta ubicación no existe. Intentá con otra.`);
+    this.getNotFound = () => {
+        return notFound;
+    }
+}crearNotFound ();
 
+function ponerNotFound() {
+    m.appendChild(getNotFound());
+}
 function eliminarHome() {
     getTituloBusqueda().remove();
     getBotonBusqueda().remove();
     getInputBusqueda().remove();
-
+    getNotFound().remove();
 }
-function crearElementos(data) {
+function crearElementos() {
     
-    let span = d.createElement('span');
-    span.innerHTML = (`La máxima es: ${data.main.temp_max}`);
+    let divBuscMenu = d.createElement('div');
+    divBuscMenu.className= ('div-busc-menu');
+    divBuscMenu.id= ('divBuscMenu');
 
-    this.getSpan = () => {
-        return span;
+    this.getDivBuscMenu = () => {
+        return divBuscMenu;
     }
-
+    
     let sectionDatos = d.createElement('section');
     sectionDatos.className = ('section-datos');
     sectionDatos.id = ('sectionDatos');
-
+    
     this.getSectionDatos = () => {
         return sectionDatos;
     }
-    ponerElementos();
-}
 
-function ponerElementos() {
-    menu.appendChild(getInputBusqueda());
-    menu.appendChild(getBotonBusqueda());
+    let h2 = d.createElement('h2');
+    h2.className = ('nombre-lugar');
+    h2.id = ('nombreLugar');
+
+    this.getH2 = () => {
+        return h2;
+    }
+
+    let span = d.createElement('span');
+    
+    this.getSpan = () => {
+        return span;
+    }
+}crearElementos();
+
+function ponerElementos(data) {
+    
+    menu.appendChild(getDivBuscMenu());
+    getInputBusqueda().className = ('menu-buscador-input');
+    getDivBuscMenu().appendChild(getInputBusqueda());
+    getDivBuscMenu().appendChild(getBotonBusqueda());
+    getNotFound().className = ('menu-not-found');
+    getDivBuscMenu().appendChild(getNotFound());
+    
+    getH2().innerHTML = (`${data.name}`);
+    m.appendChild(getH2());
+    
     m.appendChild(getSectionDatos());
+
+    getSpan().innerHTML = (`La máxima es: ${data.main.temp_max}`);
     m.appendChild(getSpan());
 }
