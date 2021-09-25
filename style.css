@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+:root {
+
+
+    --main-font: 'Inter';
+  
+    --color-bg: #001d3d;
+    --color-main: #1e96fcff;
+    --color-white: #f8f4f9ff;
+    --color-alt: #ffcb47ff;
+    --color-remark: #c86fc9ff;
+}
+
+* {
+    font-family: var(--main-font);
+}
+header {
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 4px 15px -10px black;
+}
+.navbar {
+    background-color: var(--color-bg);
+    color: var(--color-white);
+}
+.navbar a {
+    margin: auto;
+    font-weight: 700;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--color-white);
+    text-decoration: none;
+}
+.navbar a:hover {
+    color: var(--color-alt);
+}
+main {
+    color: var(--color-white);
+    background-color: var(--color-bg);
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.buscador-cont .buscador-input{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.buscador-cont .buscador-input label, input, a {
+    margin-bottom: 3rem;
+}
+.buscador-cont .buscador-input label {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-alt);
+}
+.buscador-cont .buscador-input input {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-remark);
+    padding: 0.5rem 2rem;
+    width: 50vw;
+    border-radius: 6px;
+    border: none;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.buscador-cont .buscador-input input:focus {
+    box-shadow: 0 8px 15px -5px black;
+    border: none;
+    outline: none;
+    transform: translateY(-5px);
+}
+
+.buscador-cont .buscador-input a {
+    background-color: var(--color-remark);
+    width: 25%;
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 1rem 0;
+    border-radius: 6px;
+    margin: auto;
+    transition: transform .3s ease, box-shadow .3s ease;
+    font-weight: 700;
+}
+.buscador-cont .buscador-input a:hover {
+    box-shadow: 0 8px 15px -5px black;
+    border: none;
+    outline: none;
+    transform: translateY(-5px);
+    background-color: var(--color-alt);
+}
