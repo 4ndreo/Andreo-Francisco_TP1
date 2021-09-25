@@ -134,5 +134,6 @@ main {
     bottom: 9rem;
 }
 .menu-not-found {
-    
+    position: absolute;
+    bottom: 0;
 }

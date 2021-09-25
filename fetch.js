@@ -3,6 +3,7 @@ const b = d.body
 const m = d.getElementById('main');
 const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
 const menu = d.getElementById('menu-contenedor');
+let ultValor;
 
 let noJs = d.getElementById('noJs');
 noJs.remove();
@@ -64,6 +65,8 @@ function traerDatosClima(palabraBusqueda) {
     }).then(function(responseJson){
         if (responseJson.cod == 200) {
             console.log(responseJson);
+            ultValor = responseJson.name;
+            console.log(ultValor);
             eliminarHome();
             ponerElementos(responseJson);
             return responseJson;
@@ -90,7 +93,15 @@ function crearNotFound () {
 }crearNotFound ();
 
 function ponerNotFound() {
-    m.appendChild(getNotFound());
+    if (ultValor != undefined) {
+        getNotFound().remove();
+        getNotFound().className = ('menu-not-found');
+        getDivBuscMenu().appendChild(getNotFound());
+    } else  {
+        m.appendChild(getNotFound());
+
+    }
+    
 }
 function eliminarHome() {
     getTituloBusqueda().remove();
@@ -125,7 +136,6 @@ function crearElementos() {
     }
 
     let span = d.createElement('span');
-    
     this.getSpan = () => {
         return span;
     }
@@ -137,14 +147,15 @@ function ponerElementos(data) {
     getInputBusqueda().className = ('menu-buscador-input');
     getDivBuscMenu().appendChild(getInputBusqueda());
     getDivBuscMenu().appendChild(getBotonBusqueda());
-    getNotFound().className = ('menu-not-found');
-    getDivBuscMenu().appendChild(getNotFound());
+    
+    
+    
     
     getH2().innerHTML = (`${data.name}`);
     m.appendChild(getH2());
     
     m.appendChild(getSectionDatos());
 
-    getSpan().innerHTML = (`La máxima es: ${data.weather[0].icon}`);
+    getSpan().innerHTML = (`Max: ${data.main.temp_max}°`);
     m.appendChild(getSpan());
 }
