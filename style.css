@@ -135,5 +135,5 @@ main {
 }
 .menu-not-found {
     position: absolute;
-    bottom: 0;
+    bottom: -3rem;
 }

@@ -151,7 +151,7 @@ function ponerElementos(data) {
     
     
     
-    getH2().innerHTML = (`${data.name}`);
+    getH2().innerHTML = (`${getInputBusqueda().value}`);
     m.appendChild(getH2());
     
     m.appendChild(getSectionDatos());
