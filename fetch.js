@@ -145,6 +145,6 @@ function ponerElementos(data) {
     
     m.appendChild(getSectionDatos());
 
-    getSpan().innerHTML = (`La máxima es: ${data.main.temp_max}`);
+    getSpan().innerHTML = (`La máxima es: ${data.weather[0].icon}`);
     m.appendChild(getSpan());
 }
