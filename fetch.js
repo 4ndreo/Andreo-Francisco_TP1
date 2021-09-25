@@ -2,6 +2,7 @@ const d = document;
 const b = d.body
 const m = d.getElementById('main');
 const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
+const menu = d.getElementById('menu-contenedor');
 
 let noJs = d.getElementById('noJs');
 noJs.remove();
@@ -17,7 +18,7 @@ function CrearHomeInicial() {
     let tituloBusqueda = d.createElement('label');
     tituloBusqueda.id = ('busquedaTitle');
     tituloBusqueda.for = ('busqueda');
-    tituloBusqueda.innerHTML = ('Buscá cualquier ciudad');
+    tituloBusqueda.innerHTML = ('Buscá cualquier ciudad para conocer sus datos geográficos');
 
     this.getTituloBusqueda = () => {
         return tituloBusqueda;
@@ -28,6 +29,10 @@ function CrearHomeInicial() {
     inputBusqueda.name = ('busqueda');
     inputBusqueda.type = ('text');
     inputBusqueda.autocomplete = ('off');
+
+    this.getInputBusqueda = () => {
+        return inputBusqueda;
+    }
     
     let botonBusqueda = d.createElement('a');
     botonBusqueda.href = ('#');
@@ -60,22 +65,45 @@ function traerDatosClima(palabraBusqueda) {
         crearElementos(responseJson);
         return responseJson;
     }).catch(function (err) {
-        console.log("Hubo un error!", err);
+        console.log("Hubo un fallo en la interacción con la API.", err);
     });
 
 }
 
 getBotonBusqueda().addEventListener("click", () => {
     traerDatosClima(busqueda.value);
-    EliminarHome();
+    eliminarHome();
+    
 });
-function EliminarHome() {
+
+function eliminarHome() {
     getTituloBusqueda().remove();
-    //botonBusqueda.remove();
-    //inputBusqueda.remove();
+    getBotonBusqueda().remove();
+    getInputBusqueda().remove();
 
 }
 function crearElementos(data) {
+    
+    let span = d.createElement('span');
     span.innerHTML = (`La máxima es: ${data.main.temp_max}`);
-    m.appendChild(span);
+
+    this.getSpan = () => {
+        return span;
+    }
+
+    let sectionDatos = d.createElement('section');
+    sectionDatos.className = ('section-datos');
+    sectionDatos.id = ('sectionDatos');
+
+    this.getSectionDatos = () => {
+        return sectionDatos;
+    }
+    ponerElementos();
+}
+
+function ponerElementos() {
+    menu.appendChild(getInputBusqueda());
+    menu.appendChild(getBotonBusqueda());
+    m.appendChild(getSectionDatos());
+    m.appendChild(getSpan());
 }
