@@ -150,12 +150,12 @@ function ponerElementos(data) {
     
     
     
+    // m.appendChild(getSectionDatos());
     
-    getH2().innerHTML = (`${getInputBusqueda().value}`);
-    m.appendChild(getH2());
+    // getH2().innerHTML = (`${getInputBusqueda().value}`);
+    // getSectionDatos().appendChild(getH2());
     
-    m.appendChild(getSectionDatos());
 
-    getSpan().innerHTML = (`Max: ${data.main.temp_max}°`);
-    m.appendChild(getSpan());
+    // getSpan().innerHTML = (`Max: ${data.main.temp_max}°`);
+    // getSectionDatos().appendChild(getSpan());
 }
