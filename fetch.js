@@ -33,6 +33,10 @@ function CrearHomeInicial() {
     inputBusqueda.placeholder = ('Ingresá aquí una ciudad.');
 
     this.getInputBusqueda = () => {
+        function capitalize() {
+            return inputBusqueda.value[0].toUpperCase() + inputBusqueda.value.slice(1).toLowerCase();
+        }
+        inputBusqueda.value = capitalize();
         return inputBusqueda;
     }
     
@@ -162,11 +166,7 @@ function crearElementos() {
     this.getSpanIcon = () => {
         return spanIcon;
     }
-    let imgIcon = d.createElement('img');
 
-    this.getImgIcon = () => {
-        return imgIcon;
-    }
     let spanTemp = d.createElement('span');
     spanTemp.className = ('temperatura');
     spanTemp.id = ('temperatura');
@@ -273,18 +273,19 @@ function ponerElementos(data) {
     getSectionDatos().appendChild(getDivMapa());
     getSectionDatos().appendChild(getDivInfoCiudad());
     getDivInfoCiudad().appendChild(getH2());
-    getH2().innerHTML = (`${getInputBusqueda().value}`);
+    getH2().innerHTML = (`${getInputBusqueda().value}, ${data.sys.country}`);
     getDivInfoCiudad().appendChild(getDivTempIcon());
     getDivTempIcon().appendChild(getSpanIcon());
-    getSpanIcon().appendChild(getImgIcon());
-    getImgIcon().src = (`${data.weather[0].icon}.png`);
+    getSpanIcon().className = (`temperatura icon ${getIconoClima(data.weather[0].id,data.weather[0].icon)}`);
     if(data.weather[0].icon > 200) {
 
     }
     getDivTempIcon().appendChild(getSpanTemperatura());
     getSpanTemperatura().innerHTML = (`${data.main.temp}°`);
-    getDivInfoCiudad().appendChild(getClimaDesc());
     getClimaDesc().innerHTML = (data.weather[0].description);
+    console.log(getClimaDesc());
+    getClimaDesc().innerHTML = (capitalize(getClimaDesc()));
+    getDivInfoCiudad().appendChild(getClimaDesc());
     getDivInfoCiudad().appendChild(getDivInfoClima());
     getDivInfoClima().appendChild(getUlMasInfoClima());
     getUlMasInfoClima().appendChild(getLiMax());
@@ -302,7 +303,7 @@ function ponerElementos(data) {
     getUlMasInfoClima().appendChild(getLiHumedad());
     getLiHumedad().innerHTML = (`<span class="negrita">Humedad: </span>${data.main.humidity}%`);
     getUlMasInfoClima().appendChild(getLiPresionAtm());
-    getLiPresionAtm().innerHTML = (`<span class="negrita">Presión atmosférica: </span>${data.main.feels_like} hPa`);
+    getLiPresionAtm().innerHTML = (`<span class="negrita">Presión atmosférica: </span>${data.main.pressure} hPa`);
     getUlMasInfoClima().appendChild(getLiVelViento());
     getLiVelViento().innerHTML = (`<span class="negrita">Velocidad del viento: </span>${data.wind.speed}km/h`);
     
@@ -312,4 +313,41 @@ function ponerElementos(data) {
 
     // getSpan().innerHTML = (`Max: ${data.main.temp_max}°`);
     // getSectionDatos().appendChild(getSpan());
+}
+
+function getIconoClima(codigoClima, iconoAPI) {
+    let climaIcono;
+
+    if (codigoClima>=200 && codigoClima<600) {
+        climaIcono = 'lluvia-icon';
+        if (codigoClima>=500 && codigoClima<505) {
+            climaIcono = 'dia-lluvia-icon';
+        } else if (codigoClima>=520 && codigoClima<532) {
+            climaIcono = 'noche-lluvia-icon';
+        }
+    } else if (codigoClima>=600 && codigoClima<700) {
+        climaIcono = 'nieve-icon';
+    } else if (codigoClima>=700 && codigoClima<800) {
+        climaIcono = 'neblina-icon';
+    }else if (codigoClima == 800 && iconoAPI == '01d') {
+        climaIcono = 'dia-desp-icon';
+    } else if (codigoClima == 800 && iconoAPI == '01n') {
+        climaIcono = 'noche-desp-icon';
+    } else if (codigoClima == 801 && iconoAPI == '02d') {
+        climaIcono = 'dia-nublado-icon';
+    } else if (codigoClima == 801 && iconoAPI == '02n') {
+        climaIcono = 'noche-nublado-icon';
+    } else if (codigoClima > 801) {
+        climaIcono = 'nublado-icon';
+    }
+console.log(codigoClima);
+console.log(iconoAPI);
+console.log(climaIcono);
+    return climaIcono;
+}
+
+
+function capitalize(textoCap) {
+    console.log(textoCap.innerHTML)
+    return textoCap.innerHTML[0].toUpperCase() + textoCap.innerHTML.slice(1).toLowerCase();
 }

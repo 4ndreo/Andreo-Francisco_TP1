@@ -157,6 +157,12 @@ main {
     justify-content: space-between;
     width: 50%;
     margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-main);
+    border-radius: 6px;
+    padding: 2rem;
+    box-shadow: 0 8px 15px -5px black;
 }
 .temperatura {
     font-size: 4rem;
@@ -189,4 +195,41 @@ main {
 }
 .negrita {
     font-weight: 700;
+}
+
+
+
+.lluvia-icon {
+    background: url(../img/icons-clima/023-thunderstorm.svg) no-repeat center center;
+}
+.dia-desp-icon {
+    background: url(../img/icons-clima/013-sun.svg) no-repeat center center;
+}
+.dia-lluvia-icon {
+    background: url(../img/icons-clima/001-rainy\ day.svg) no-repeat center center;
+}
+.dia-nublado-icon {
+    background: url(../img/icons-clima/049-cloudy.svg) no-repeat center center;
+}
+.nieve-icon {
+    background: url(../img/icons-clima/018-snowflake.svg) no-repeat center center;
+}
+.noche-desp-icon {
+    background: url(../img/icons-clima/011-half\ moon.svg) no-repeat center center;
+}
+.noche-lluvia-icon {
+    background: url(../img/icons-clima/012-rainy\ day.svg) no-repeat center center;
+}
+.noche-nublado-icon {
+    background: url(../img/icons-clima/050-cloudy.svg) no-repeat center center;
+}
+.nublado-icon {
+    background: url(../img/icons-clima/044-cloud.svg) no-repeat center center;
+}
+.neblina-icon {
+    background: url(../img/icons-clima/024-graph.svg) no-repeat center center;
+}
+.icon {
+    background-size: 100%;
+    padding: 2.5rem;
 }
