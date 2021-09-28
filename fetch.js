@@ -68,9 +68,7 @@ function traerDatosClima(palabraBusqueda) {
         return response.json();
     }).then(function(responseJson){
         if (responseJson.cod == 200) {
-            console.log(responseJson);
             ultValor = responseJson.name;
-            console.log(ultValor);
             eliminarHome();
             ponerElementos(responseJson);
             return responseJson;
