@@ -49,11 +49,12 @@ header {
 main {
     color: var(--color-white);
     background-color: var(--color-bg);
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     justify-content: center;
     align-content: center;
     position: relative;
+    /* padding-top: 300px; */
 }
 .buscador-cont .buscador-input{
     display: flex;
@@ -137,7 +138,7 @@ main {
     position: absolute;
     bottom: -3rem;
 }
-.seccion-datos {
+.section-datos {
     display: flex;
     min-width: 75vw;
 }

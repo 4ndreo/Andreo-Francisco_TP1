@@ -127,6 +127,20 @@ function crearElementos() {
         return sectionDatos;
     }
 
+    let divMapa = d.createElement('div');
+    divMapa.className = ('mapa');
+
+    this.getDivMapa = () => {
+        return divMapa;
+    }
+
+    let divInfoCiudad = d.createElement('div');
+    divInfoCiudad.className = ('info-ciudad');
+
+    this.getDivInfoCiudad = () => {
+        return divInfoCiudad;
+    }
+
     let h2 = d.createElement('h2');
     h2.className = ('nombre-lugar');
     h2.id = ('nombreLugar');
@@ -135,9 +149,114 @@ function crearElementos() {
         return h2;
     }
 
-    let span = d.createElement('span');
-    this.getSpan = () => {
-        return span;
+    let divTempIcon = d.createElement('div');
+    divTempIcon.className = ('temp-icon');
+
+    this.getDivTempIcon = () => {
+        return divTempIcon;
+    }
+
+    let spanIcon = d.createElement('span');
+    spanIcon.className = ('temperatura icon');
+
+    this.getSpanIcon = () => {
+        return spanIcon;
+    }
+    let imgIcon = d.createElement('img');
+
+    this.getImgIcon = () => {
+        return imgIcon;
+    }
+    let spanTemp = d.createElement('span');
+    spanTemp.className = ('temperatura');
+    spanTemp.id = ('temperatura');
+
+    this.getSpanTemperatura = () => {
+        return spanTemp;
+    }
+
+    let pClimaDesc = d.createElement('p');
+    pClimaDesc.className = ('clima-desc');
+
+    this.getClimaDesc = () => {
+        return pClimaDesc;
+    }
+
+    let divInfoClima = d.createElement('div');
+    divInfoClima.className = ('info-clima');
+
+    this.getDivInfoClima = () => {
+        return divInfoClima;
+    }
+
+    let ulMasInfoClima = d.createElement('ul');
+    ulMasInfoClima.className = ('mas-info-clima');
+
+    this.getUlMasInfoClima = () => {
+        return ulMasInfoClima;
+    }
+
+    let liMax = d.createElement('li');
+    liMax.className = ('max-min');
+
+    this.getLiMax = () => {
+        return liMax;
+    }
+    let spanMaxTitulo = d.createElement('span');
+    spanMaxTitulo.className = ('negrita');
+
+    this.getSpanMaxTitulo = () => {
+        return spanMaxTitulo;
+    }
+    let spanMax = d.createElement('span');
+
+    this.getSpanMax = () => {
+        return spanMax;
+    }
+    let liMin = d.createElement('li');
+    liMin.className = ('max-min');
+
+    this.getLiMin = () => {
+        return liMin;
+    }
+    let spanMinTitulo = d.createElement('span');
+    spanMinTitulo.className = ('negrita');
+
+    this.getSpanMinTitulo = () => {
+        return spanMinTitulo;
+    }
+    let spanMin = d.createElement('span');
+
+    this.getSpanMin = () => {
+        return spanMin;
+    }
+
+    let liTermica = d.createElement('li');
+    liTermica.className = ('termica');
+
+    this.getLiTermica = () => {
+        return liTermica;
+    }
+
+    let liHumedad = d.createElement('li');
+    liHumedad.className = ('humedad');
+
+    this.getLiHumedad = () => {
+        return liHumedad;
+    }
+
+    let liPresionAtm = d.createElement('li');
+    liPresionAtm.className = ('presion-atm');
+
+    this.getLiPresionAtm = () => {
+        return liPresionAtm;
+    }
+
+    let liVelViento = d.createElement('li');
+    liVelViento.className = ('vel-viento');
+
+    this.getLiVelViento = () => {
+        return liVelViento;
     }
 }crearElementos();
 
@@ -150,9 +269,44 @@ function ponerElementos(data) {
     
     
     
-    // m.appendChild(getSectionDatos());
+    m.appendChild(getSectionDatos());
+    getSectionDatos().appendChild(getDivMapa());
+    getSectionDatos().appendChild(getDivInfoCiudad());
+    getDivInfoCiudad().appendChild(getH2());
+    getH2().innerHTML = (`${getInputBusqueda().value}`);
+    getDivInfoCiudad().appendChild(getDivTempIcon());
+    getDivTempIcon().appendChild(getSpanIcon());
+    getSpanIcon().appendChild(getImgIcon());
+    getImgIcon().src = (`${data.weather[0].icon}.png`);
+    if(data.weather[0].icon > 200) {
+
+    }
+    getDivTempIcon().appendChild(getSpanTemperatura());
+    getSpanTemperatura().innerHTML = (`${data.main.temp}°`);
+    getDivInfoCiudad().appendChild(getClimaDesc());
+    getClimaDesc().innerHTML = (data.weather[0].description);
+    getDivInfoCiudad().appendChild(getDivInfoClima());
+    getDivInfoClima().appendChild(getUlMasInfoClima());
+    getUlMasInfoClima().appendChild(getLiMax());
+    getLiMax().appendChild(getSpanMaxTitulo());
+    getSpanMaxTitulo().innerHTML = ('Max: ');
+    getLiMax().appendChild(getSpanMax());
+    getSpanMax().innerHTML = (`${data.main.temp_max}°`);
+    getUlMasInfoClima().appendChild(getLiMin());
+    getLiMin().appendChild(getSpanMinTitulo());
+    getSpanMinTitulo().innerHTML = ('Min: ');
+    getLiMin().appendChild(getSpanMin());
+    getSpanMin().innerHTML = (`${data.main.temp_min}°`);
+    getUlMasInfoClima().appendChild(getLiTermica());
+    getLiTermica().innerHTML = (`<span class="negrita">Sensación térmica: </span>${data.main.feels_like}°`);
+    getUlMasInfoClima().appendChild(getLiHumedad());
+    getLiHumedad().innerHTML = (`<span class="negrita">Humedad: </span>${data.main.humidity}%`);
+    getUlMasInfoClima().appendChild(getLiPresionAtm());
+    getLiPresionAtm().innerHTML = (`<span class="negrita">Presión atmosférica: </span>${data.main.feels_like} hPa`);
+    getUlMasInfoClima().appendChild(getLiVelViento());
+    getLiVelViento().innerHTML = (`<span class="negrita">Velocidad del viento: </span>${data.wind.speed}km/h`);
     
-    // getH2().innerHTML = (`${getInputBusqueda().value}`);
+
     // getSectionDatos().appendChild(getH2());
     
 
