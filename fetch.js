@@ -2,6 +2,7 @@ const d = document;
 const b = d.body
 const m = d.getElementById('main');
 const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
+const MAPS_API_KEY = "EIMgCoAvMxGd5oXuO50T5ZwQQBhSE8hU";
 const menu = d.getElementById('menu-contenedor');
 let ultValor;
 
