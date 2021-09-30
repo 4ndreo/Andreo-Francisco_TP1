@@ -2,7 +2,7 @@ const d = document;
 const b = d.body
 const m = d.getElementById('main');
 const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
-const MAPS_API_KEY = "EIMgCoAvMxGd5oXuO50T5ZwQQBhSE8hU";
+const MAPS_API_KEY = "AIzaSyBch-nDzThvc6FKaoelUPl_L7fsGqksZyc";
 const menu = d.getElementById('menu-contenedor');
 let ultValor;
 
@@ -54,37 +54,44 @@ function CrearHomeInicial() {
     divBusqueda.appendChild(tituloBusqueda);
     divBusqueda.appendChild(inputBusqueda);
     divBusqueda.appendChild(botonBusqueda);
+}CrearHomeInicial();
+
+if (localStorage.getItem('Locacion') != null) {
+    busqueda.value = localStorage.getItem('Locacion');
+
+    traerDatosClima(localStorage.getItem('Locacion'));
 }
-
-
-CrearHomeInicial();
 
 
 
 function traerDatosClima(palabraBusqueda) {
-
+    
     fetch (
-       `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${API_KEY}&lang=es&units=metric`
-    ).then(function(response){
+        `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${API_KEY}&lang=es&units=metric`
+        ).then(function(response){
         return response.json();
     }).then(function(responseJson){
         if (responseJson.cod == 200) {
             ultValor = responseJson.name;
             eliminarHome();
+            
             ponerElementos(responseJson);
             return responseJson;
         } else {
-           ponerNotFound();
+            ponerNotFound();
         }
     }).catch(function (err) {
         console.log("Hubo un fallo en la interacción con la API.", err);
     });
-
+    
 }
 
-getBotonBusqueda().addEventListener("click", () => {
-    traerDatosClima(busqueda.value);
-});
+    getBotonBusqueda().addEventListener("click", () => {
+        traerDatosClima(busqueda.value);
+        localStorage.setItem("Locacion",getInputBusqueda().value)
+    });
+
+
 function crearNotFound () {
     let notFound = d.createElement('p');
     notFound.className = ('not-found');
@@ -112,6 +119,16 @@ function eliminarHome() {
     getInputBusqueda().remove();
     getNotFound().remove();
 }
+function crearMapa() {
+    let iframeMap = d.createElement('iframe');
+    iframeMap.id = ('mapaIframe');
+    iframeMap.className = ('mapa');
+
+    this.getMapaIframe = () => {
+        return iframeMap;
+    }
+}crearMapa();
+
 function crearElementos() {
     
     let divBuscMenu = d.createElement('div');
@@ -269,7 +286,8 @@ function ponerElementos(data) {
     
     
     m.appendChild(getSectionDatos());
-    getSectionDatos().appendChild(getDivMapa());
+    getMapaIframe().src = (`https://www.google.com/maps/embed/v1/place?key=${MAPS_API_KEY}&q=${getInputBusqueda().value}`);
+    getSectionDatos().appendChild(getMapaIframe());
     getSectionDatos().appendChild(getDivInfoCiudad());
     getDivInfoCiudad().appendChild(getH2());
     getH2().innerHTML = (`${getInputBusqueda().value}, ${data.sys.country}`);
