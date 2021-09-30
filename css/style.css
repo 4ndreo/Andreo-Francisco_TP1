@@ -59,6 +59,10 @@ main {
     justify-content: center;
     align-content: center;
     position: relative;
+    
+}
+@media screen and (max-height: 800px) {
+    main {padding-top: 100px;}
 }
 .buscador-cont .buscador-input{
     display: flex;
@@ -159,6 +163,7 @@ main {
 .temp-icon {
     display: flex;
     justify-content: space-between;
+    min-width: 320px;
     width: 50%;
     margin: auto;
     margin-top: 2rem;
