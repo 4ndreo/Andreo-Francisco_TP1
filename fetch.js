@@ -34,10 +34,13 @@ function CrearHomeInicial() {
     inputBusqueda.placeholder = ('Ingresá aquí una ciudad.');
 
     this.getInputBusqueda = () => {
-        function capitalize() {
-            return inputBusqueda.value[0].toUpperCase() + inputBusqueda.value.slice(1).toLowerCase();
+        if (inputBusqueda.value[0]!= null) {
+            function capitalize() {
+                return inputBusqueda.value[0].toUpperCase() + inputBusqueda.value.slice(1).toLowerCase();
+            }
+
+            inputBusqueda.value = capitalize();
         }
-        inputBusqueda.value = capitalize();
         return inputBusqueda;
     }
     
@@ -85,11 +88,18 @@ function traerDatosClima(palabraBusqueda) {
     });
     
 }
+getInputBusqueda().addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        traerDatosClima(busqueda.value);
+        localStorage.setItem("Locacion",getInputBusqueda().value)
+    }
+  });
 
     getBotonBusqueda().addEventListener("click", () => {
         traerDatosClima(busqueda.value);
         localStorage.setItem("Locacion",getInputBusqueda().value)
     });
+
 
 
 function crearNotFound () {
