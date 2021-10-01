@@ -303,7 +303,7 @@ function ponerElementos(data) {
     
     
     m.appendChild(getSectionDatos());
-    getMapaIframe().src = (`https://www.google.com/maps/embed/v1/place?key=${MAPS_API_KEY}&q=${getInputBusqueda().value}`);
+    getMapaIframe().src = (`https://www.google.com/maps/embed/v1/place?key=${MAPS_API_KEY}&q=${getInputBusqueda().value}&center=${data.coord.lat},${data.coord.lon}`);
     getSectionDatos().appendChild(getMapaIframe());
     getSectionDatos().appendChild(getDivInfoCiudad());
     getDivInfoCiudad().appendChild(getH2());
