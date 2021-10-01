@@ -70,7 +70,7 @@ if (localStorage.getItem('Locacion') != null) {
 function traerDatosClima(palabraBusqueda) {
     
     fetch (
-        `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${API_KEY}&lang=es&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${process.env.API_KEY}&lang=es&units=metric`
         ).then(function(response){
         return response.json();
     }).then(function(responseJson){
