@@ -20,7 +20,7 @@ function CrearHomeInicial() {
     let tituloBusqueda = d.createElement('label');
     tituloBusqueda.id = ('busquedaTitle');
     tituloBusqueda.for = ('busqueda');
-    tituloBusqueda.innerHTML = ('Buscá cualquier ciudad para conocer sus datos geográficos');
+    tituloBusqueda.innerHTML = ('Buscá cualquier ciudad para conocer el clima');
 
     this.getTituloBusqueda = () => {
         return tituloBusqueda;
