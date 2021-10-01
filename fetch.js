@@ -1,7 +1,7 @@
 const d = document;
 const b = d.body
 const m = d.getElementById('main');
-const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
+// const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
 const MAPS_API_KEY = "AIzaSyBch-nDzThvc6FKaoelUPl_L7fsGqksZyc";
 const menu = d.getElementById('menu-contenedor');
 let ultValor;
