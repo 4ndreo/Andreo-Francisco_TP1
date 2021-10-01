@@ -1,7 +1,7 @@
 const d = document;
 const b = d.body
 const m = d.getElementById('main');
-// const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
+const API_KEY = "bab79d526b33f5cb30e5b30322a46298";
 const MAPS_API_KEY = "AIzaSyBch-nDzThvc6FKaoelUPl_L7fsGqksZyc";
 const menu = d.getElementById('menu-contenedor');
 let ultValor;
@@ -70,7 +70,7 @@ if (localStorage.getItem('Locacion') != null) {
 function traerDatosClima(palabraBusqueda) {
     
     fetch (
-        `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${process.env.API_KEY}&lang=es&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${palabraBusqueda}&appid=${API_KEY}&lang=es&units=metric`
         ).then(function(response){
         return response.json();
     }).then(function(responseJson){
