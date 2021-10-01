@@ -59,11 +59,7 @@ function CrearHomeInicial() {
     divBusqueda.appendChild(botonBusqueda);
 }CrearHomeInicial();
 
-if (localStorage.getItem('Locacion') != null) {
-    busqueda.value = localStorage.getItem('Locacion');
 
-    traerDatosClima(localStorage.getItem('Locacion'));
-}
 
 
 
@@ -77,7 +73,7 @@ function traerDatosClima(palabraBusqueda) {
         if (responseJson.cod == 200) {
             ultValor = responseJson.name;
             eliminarHome();
-            
+            guardarStorage(responseJson);
             ponerElementos(responseJson);
             return responseJson;
         } else {
@@ -91,13 +87,12 @@ function traerDatosClima(palabraBusqueda) {
 getInputBusqueda().addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         traerDatosClima(busqueda.value);
-        localStorage.setItem("Locacion",getInputBusqueda().value)
+        
     }
   });
 
     getBotonBusqueda().addEventListener("click", () => {
         traerDatosClima(busqueda.value);
-        localStorage.setItem("Locacion",getInputBusqueda().value)
     });
 
 
@@ -123,6 +118,15 @@ function ponerNotFound() {
     }
     
 }
+
+
+function guardarStorage (data) {
+    localStorage.setItem("Locacion", data);
+    localStorage.getItem("Locacion");
+    localStorage.setItem("Locacion", JSON.stringify(data));
+    JSON.parse(localStorage.getItem("Locacion"));
+}
+
 function eliminarHome() {
     getTituloBusqueda().remove();
     getBotonBusqueda().remove();
@@ -285,7 +289,10 @@ function crearElementos() {
         return liVelViento;
     }
 }crearElementos();
-
+if (localStorage.getItem('Locacion') != null) {
+    busqueda.value = JSON.parse(localStorage.getItem('Locacion')).name;
+    ponerElementos(JSON.parse(localStorage.getItem("Locacion")));
+}
 function ponerElementos(data) {
     
     menu.appendChild(getDivBuscMenu());
